@@ -8,3 +8,8 @@ const feedbackMessage = document.querySelector(".message");//empty paragraph whe
 const playAgainButton = document.querySelector(".play-again");//hidden PLay Again button
 
 const word = "magnolia";//test word
+
+const placeholder = function () {
+    //need array here []. Need to go back through chapter!
+   
+};
