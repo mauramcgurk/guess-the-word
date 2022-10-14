@@ -6,3 +6,5 @@ const remainingGuessesParagraph = document.querySelector(".remaining");//paragra
 const remainingGuessesSpan = document.querySelector(".remaining span");//span inside the paragraph where the remaining guesses will display
 const feedbackMessage = document.querySelector(".message");//empty paragraph where feedback messages will appear when the player guesses a letter
 const playAgainButton = document.querySelector(".play-again");//hidden PLay Again button
+
+const word = "magnolia";//test word
