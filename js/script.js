@@ -11,12 +11,12 @@ const word = "magnolia";//test word
 
 //I do not understand any of the following - but it worked the way it's supposed to
 const placeholder = function (word) {
-    const placeholderLetters = [];
-    for (const letter of word) {
+    const placeholderLetters = []; //empty array is for adding to
+    for (const letter of word) { //for...of is Value Only. Iterates through the values of an object. "letter" stores elements processed by array. FOR + VARIABLE + OF + ARRAY NAME. The variable represents each element as you loop through array.
         console.log(letter);
-        placeholderLetters.push("●");
+        placeholderLetters.push("●"); //PUSH adds to end of array - but why? Because the dot has to get in there somehow, I guess…
     }
-    wordInProgress.innerText = placeholderLetters.join("");
+    wordInProgress.innerText = placeholderLetters.join(""); //see notes
 };
 
 placeholder(word);
