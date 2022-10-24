@@ -9,7 +9,14 @@ const playAgainButton = document.querySelector(".play-again");//hidden PLay Agai
 
 const word = "magnolia";//test word
 
-const placeholder = function () {
-    //need array here []. Need to go back through chapter!
-   
+//I do not understand any of the following - but it worked the way it's supposed to
+const placeholder = function (word) {
+    const placeholderLetters = [];
+    for (const letter of word) {
+        console.log(letter);
+        placeholderLetters.push("●");
+    }
+    wordInProgress.innerText = placeholderLetters.join("");
 };
+
+placeholder(word);
