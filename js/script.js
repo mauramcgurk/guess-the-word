@@ -20,3 +20,12 @@ const placeholder = function (word) {
 };
 
 placeholder(word);
+
+button.addEventListener ("click", function (e)
+    e.preventDefault();
+    const inputGuess = [];//captures value of the input guess
+    console.log(inputGuess);
+    const clearInput = inputGuess.values;
+    clearInput();
+    //empty the value of inputGuess - pop?
+)
