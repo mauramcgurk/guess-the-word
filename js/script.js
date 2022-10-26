@@ -21,12 +21,11 @@ const placeholder = function (word) {
 
 placeholder(word);
 
-button.addEventListener ("click", function (e)
+button.addEventListener ("click", function (e) {
     e.preventDefault();
     const inputGuess = input.value;//captures value of the input guess
     console.log(inputGuess);
     clearInput(); //empty the value of inputGuess
-    }
 });
 
 const clearInput = function () {
