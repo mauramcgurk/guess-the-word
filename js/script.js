@@ -44,7 +44,7 @@ const validateGuess = function (input) {
     } else if (input.length > 1) {
         //check if player has entered more than one letter
         feedbackMessage.innerText = "Hold on, just one letter at a time. Try it again.";
-    } else if (input.match(acceptedLetter)) {
+    } else if (!input.match(acceptedLetter)) {
         //check if they’ve entered a character that doesn’t match the regular expression pattern
         feedbackMessage.innerText = "Please enter a letter from A to Z.";
     } else {
