@@ -25,9 +25,31 @@ button.addEventListener ("click", function (e) {
     e.preventDefault();
     const inputGuess = input.value;//captures value of the input guess
     console.log(inputGuess);
-    clearInput(); //empty the value of inputGuess
+    clearInput(); //empty the value of inputGuess. This matches Potluck Guest List code - and works as described (it shows guessed letter in console - but it differs from solution code. If there's a problem, investigate this area.)
 });
 
 const clearInput = function () {
     input.value = "";
 };
+
+const validateGuess = function (input) {
+    const acceptedLetter = /[a-zA-Z]/; //regular expression lets you find text that matches a specific pattern, like alphabetic  only (no number/symbols). Ensures player inputs letters
+    if (input.length === 0) { 
+        //check if input is empty
+        feedbackMessage.innerText = "Hey, ya gotta enter a letter from A to Z! Give it another try.";
+    } else if (input.length > 1) {
+        //check if player has entered more than one letter
+        feedbackMessage.innerText = "Hold on, just one letter at a time. Try it again.";
+    } else if (input.match(acceptedLetter)) {
+        //check if they’ve entered a character that doesn’t match the regular expression pattern
+        feedbackMessage.innerText = "Please enter a letter from A to Z.";
+    } else {
+        //We finally got a single letter, omg yay
+        return input;
+    }
+};
+   
+    
+    
+    //Each condition should have a message directing the player on what to input
+}
