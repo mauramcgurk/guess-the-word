@@ -23,9 +23,12 @@ placeholder(word);
 
 button.addEventListener ("click", function (e)
     e.preventDefault();
-    const inputGuess = [];//captures value of the input guess
+    const inputGuess = input.value;//captures value of the input guess
     console.log(inputGuess);
-    const clearInput = inputGuess.values;
-    clearInput();
-    //empty the value of inputGuess - pop?
-)
+    clearInput(); //empty the value of inputGuess
+    }
+});
+
+const clearInput = function () {
+    input.value = "";
+};
