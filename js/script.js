@@ -48,8 +48,3 @@ const validateGuess = function (input) {
         return input;
     }
 };
-   
-    
-    
-    //Each condition should have a message directing the player on what to input
-}
