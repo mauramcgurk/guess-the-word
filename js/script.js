@@ -8,6 +8,7 @@ const feedbackMessage = document.querySelector(".message");//empty paragraph whe
 const playAgainButton = document.querySelector(".play-again");//hidden PLay Again button
 
 const word = "magnolia";//test word
+const guessedLetters = []; //empty array for adding to
 
 //I do not understand any of the following - but it worked the way it's supposed to
 const placeholder = function (word) {
