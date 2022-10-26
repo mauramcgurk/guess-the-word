@@ -29,9 +29,8 @@ button.addEventListener ("click", function (e) {
     clearInput(); //empty the value of inputGuess. This matches Potluck Guest List code - and works as described (it shows guessed letter in console - but it differs from solution code. If there's a problem, investigate this area.)
     //validateGuess(inputGuess);
     const goodGuess = validateGuess(inputGuess);
+    console.log(goodGuess);
     });
-        console.log(goodGuess);
-;
 
 const clearInput = function () {
     input.value = "";
