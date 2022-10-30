@@ -1,4 +1,4 @@
-const guessedLetters = document.querySelector(".guessed-letters");//unordered list where the player’s guessed letters will appear
+const guessedLettersBox = document.querySelector(".guessed-letters");//unordered list where the player’s guessed letters will appear
 const button = document.querySelector(".guess");//Guess button
 const input = document.querySelector(".letter");//text input where the player will guess a letter
 const wordInProgress = document.querySelector(".word-in-progress"); //empty paragraph where the word in progress will appear via dots and letters
@@ -53,3 +53,20 @@ const validateGuess = function (input) {
         return input;
     }
 };
+
+const makeGuess = function (inputGuess) {
+    inputGuess = inputGuess.toUpperCase();
+    if (guessedLetters.includes(inputGuess)) {
+        feedbackMessage.innerText = "Oops, you've already guessed that letter! Try again.";
+    } else {
+        guessedLetters.push(inputGuess); //add to guessedLetters array
+    console.log(guessedLetters);
+    showGuessLetters();
+    }
+};
+
+const showGuessLetters = function () {
+    guessedLettersBox.innerText = ""; //empty the text of message element
+    for (const letter of guessedLetters) { //for...of is Value Only. Iterates through
+
+    }
