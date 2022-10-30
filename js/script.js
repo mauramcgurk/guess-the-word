@@ -27,15 +27,18 @@ button.addEventListener ("click", function (e) {
     feedbackMessage.innerText = ""; //empty the text of message element
     const inputGuess = input.value;//captures value of the input guess
     //console.log(inputGuess);
-    clearInput(); //empty the value of inputGuess. This matches Potluck Guest List code - and works as described (it shows guessed letter in console - but it differs from solution code. If there's a problem, investigate this area.)
+    //clearInput(); //empty the value of inputGuess. This matches Potluck Guest List code - and works as described (it shows guessed letter in console - but it differs from solution code. If there's a problem, investigate this area.)
     //validateGuess(inputGuess);
     const goodGuess = validateGuess(inputGuess);
-    console.log(goodGuess);
-    });
+    //console.log(goodGuess);
 
-const clearInput = function () {
+    if (goodGuess) {
+        //we've got a letter - let's guess
+        makeGuess(inputGuess)
+    }   
+//const clearInput = function () {
     input.value = "";
-};
+});
 
 const validateGuess = function (input) {
     const acceptedLetter = /[a-zA-Z]/; //regular expression lets you find text that matches a specific pattern, like alphabetic only. Ensures player inputs letters
@@ -60,13 +63,15 @@ const makeGuess = function (inputGuess) {
         feedbackMessage.innerText = "Oops, you've already guessed that letter! Try again.";
     } else {
         guessedLetters.push(inputGuess); //add to guessedLetters array
-    console.log(guessedLetters);
-    showGuessLetters();
+    console.log(guessedLetters); //shows array of guessed letters
+    //showGuessLetters();
     }
 };
 
+/*
 const showGuessLetters = function () {
     guessedLettersBox.innerText = ""; //empty the text of message element
     for (const letter of guessedLetters) { //for...of is Value Only. Iterates through
 
     }
+    */
