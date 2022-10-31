@@ -71,8 +71,8 @@ const makeGuess = function (inputGuess) {
 const showGuessLetters = function () {
     guessedLettersBox.innerText = ""; //empty the text of message element
     for (const letter of guessedLetters) { 
-        const li = document.createElement ("li"); //Create a new list item for each letter inside your guessedLetters array (i.e., the global variable) and add it to the unordered list.
+        const li = document.createElement ("li"); //Create a new list item for each letter inside guessedLetters array (i.e., the global variable) and add it to the unordered list.
         li.innerText = letter;
-        //li.append(letter); TAKE ANOTHER LOOK HERE
+        guessedLettersBox.append(letter); //appends each guessed letter to the array of guessed letters. Adding text to a DOM element (see 1st global variable)
     }
 };
