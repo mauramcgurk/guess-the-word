@@ -63,15 +63,16 @@ const makeGuess = function (inputGuess) {
         feedbackMessage.innerText = "Oops, you've already guessed that letter! Try again.";
     } else {
         guessedLetters.push(inputGuess); //add to guessedLetters array
-    console.log(guessedLetters); //shows array of guessed letters
-    //showGuessLetters();
+        showGuessLetters();
+        console.log(guessedLetters); //shows array of guessed letters
     }
 };
 
-/*
 const showGuessLetters = function () {
     guessedLettersBox.innerText = ""; //empty the text of message element
-    for (const letter of guessedLetters) { //for...of is Value Only. Iterates through
-
+    for (const letter of guessedLetters) { 
+        const li = document.createElement ("li"); //Create a new list item for each letter inside your guessedLetters array (i.e., the global variable) and add it to the unordered list.
+        li.innerText = letter;
+        //li.append(letter); TAKE ANOTHER LOOK HERE
     }
-    */
+};
