@@ -77,9 +77,17 @@ const showGuessLetters = function () {
     }
 };
 
-const updateWord = function (guessedLetters) { //This function will replace the circle symbols with the correct letters guessed
+const updateWordInProgress = function (guessedLetters) { //This function will replace the circle symbols with the correct letters guessed
     const wordUpper = word.toUpperCase(); 
     const wordArray = wordUpper.split(""); //split the word string into an array so that the letter can appear in the guessedLetters array
-    console.log(wordArray);
+    //console.log(wordArray);
+    for (const letter of wordArray) //I'm not sure about this - looping through array though
+        if (guessedLetters.includes(letter)) {
+            revealWord.push(letter.toUpperCase()); //how do you come up with this? I can sort of see in retrospect...but couldn't create
+        } else {
+            revealWord.push ("●"); //once again, how do you come up with this? Ask Arnav
+        }
+        }
+    }
 }
 
