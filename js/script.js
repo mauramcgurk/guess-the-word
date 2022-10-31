@@ -76,3 +76,10 @@ const showGuessLetters = function () {
         guessedLettersBox.append(letter); //appends each guessed letter to the array of guessed letters. Adding text to a DOM element (see 1st global variable)
     }
 };
+
+const updateWord = function (guessedLetters) { //This function will replace the circle symbols with the correct letters guessed
+    const wordUpper = word.toUpperCase(); 
+    const wordArray = wordUpper.split(""); //split the word string into an array so that the letter can appear in the guessedLetters array
+    console.log(wordArray);
+}
+
