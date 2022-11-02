@@ -65,6 +65,7 @@ const makeGuess = function (inputGuess) {
         guessedLetters.push(inputGuess); //add to guessedLetters array
         showGuessLetters();
         console.log(guessedLetters); //shows array of guessed letters
+        updateWordInProgress (guessedLetters);
     }
 };
 
@@ -81,13 +82,21 @@ const updateWordInProgress = function (guessedLetters) { //This function will re
     const wordUpper = word.toUpperCase(); 
     const wordArray = wordUpper.split(""); //split the word string into an array so that the letter can appear in the guessedLetters array
     //console.log(wordArray);
+    const revealWord = []; 
     for (const letter of wordArray) //I'm not sure about this - looping through array though
         if (guessedLetters.includes(letter)) {
-            revealWord.push(letter.toUpperCase()); //how do you come up with this? I can sort of see in retrospect...but couldn't create
+            revealWord.push(letter.toUpperCase()); //pushing either letter or dot    how do you come up with this? I can sort of see in retrospect...but couldn't create
         } else {
-            revealWord.push ("●"); //once again, how do you come up with this? Ask Arnav
+            revealWord.push ("●"); //just standard for adding to array. Important is either letter or dot...  once again, how do you come up with this? Ask Arnav
+        } 
+    wordInProgress.innerText = revealWord.join(""); //passing empty string
+    successfulGuess();
         }
-        }
-    }
+
+const successfulGuess = function () {
+    if (wordInProgress.innerText === word.toUpperCase()) {
+        feedbackMessage.innerText = "You guessed correct the word! Congrats!";
+    feedbackMessage.classList.add("win");
+    } //it's html so it's going to be innerText, nothing to do w/ vars or methods
 }
 
