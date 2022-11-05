@@ -19,12 +19,11 @@ const getWord = async function () { //best practice to put any function below al
 }
 getWord ();
 
-//I do not understand any of the following - but it worked the way it's supposed to
 const placeholder = function (word) {
     const placeholderLetters = []; //empty array is for adding to
     for (const letter of word) { //for...of is Value Only. Iterates through the values of an object. "letter" stores elements processed by array. FOR + VARIABLE + OF + ARRAY NAME. The variable represents each element as you loop through array.
         console.log(letter);
-        placeholderLetters.push("●"); //PUSH adds to end of array - but why? Because the dot has to get in there somehow, I guess…
+        placeholderLetters.push("●"); //Add push here because the dot has to get in there somehow, I guess…
     }
     wordInProgress.innerText = placeholderLetters.join(""); //see notes
 };
