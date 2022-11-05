@@ -6,9 +6,18 @@ const remainingGuessesParagraph = document.querySelector(".remaining");//paragra
 const remainingGuessesSpan = document.querySelector(".remaining span");//span inside the paragraph where the remaining guesses will display
 const feedbackMessage = document.querySelector(".message");//empty paragraph where feedback messages will appear when the player guesses a letter
 const playAgainButton = document.querySelector(".play-again");//hidden PLay Again button
-
+let remainingGuesses = 8;
 const word = "magnolia";//test word
 const guessedLetters = []; //empty array for adding to
+
+const getWord = async function () { //best practice to put any function below all variables - so all functions have access to all variables
+    const wordsDatabaseUrl = 
+        "https://gist.githubusercontent.com/skillcrush-curriculum/7061f1d4d3d5bfe47efbfbcfe42bf57e/raw/5ffc447694486e7dea686f34a6c085ae371b43fe/words.txt"; //we made this a variable because it's a verrry long string (too long) and also - we can use it again wherever now that it's a variable. This is a little different from the way SC originally suggested. Go back to notes.
+        let textFile = await fetch (wordsDatabaseUrl); //fetching file not contents
+        let content = await textFile.text ();
+    console.log (content); //logs out contents of entire text file - alphabetically, hundreds of words. It's working.
+}
+getWord ();
 
 //I do not understand any of the following - but it worked the way it's supposed to
 const placeholder = function (word) {
@@ -65,6 +74,7 @@ const makeGuess = function (inputGuess) {
         guessedLetters.push(inputGuess); //add to guessedLetters array
         showGuessLetters();
         console.log(guessedLetters); //shows array of guessed letters
+        decreaseGuesses (inputGuess); //decreasing number of guesses each time
         updateWordInProgress (guessedLetters);
     }
 };
@@ -93,6 +103,25 @@ const updateWordInProgress = function (guessedLetters) { //This function will re
     successfulGuess();
         }
 
+const decreaseGuesses = function (guess) {
+    const wordUpper = word.toUpperCase(); 
+    if (wordUpper.includes(guess)) {
+        feedbackMessage.innerText = "Yes, the word contains that letter!";
+    } else {
+        feedbackMessage.innerText = "No, that letter isn't in the word. Try again."
+        remainingGuesses --; //subtracts 1
+    } 
+    if (remainingGuesses === 0) {
+        feedbackMessage.innerText = `You're out of guesses. The word is ${word}.`;
+    }
+    if (remainingGuesses === 1) {
+        remainingGuessesSpan.innerText = `one guess`;
+    }
+    if (remainingGuesses >1) {
+        remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
+    }
+}
+        
 const successfulGuess = function () {
     if (wordInProgress.innerText === word.toUpperCase()) {
         feedbackMessage.innerText = "You guessed correct the word! Congrats!";
