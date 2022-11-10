@@ -7,17 +7,21 @@ const remainingGuessesSpan = document.querySelector(".remaining span");//span in
 const feedbackMessage = document.querySelector(".message");//empty paragraph where feedback messages will appear when the player guesses a letter
 const playAgainButton = document.querySelector(".play-again");//hidden PLay Again button
 let remainingGuesses = 8;
-const word = "magnolia";//test word
-const guessedLetters = []; //empty array for adding to
+let word = "magnolia";//test word
+let guessedLetters = []; //empty array for adding to. Eventually becomes let instead of const so it can change
 
 const getWord = async function () { //best practice to put any function below all variables - so all functions have access to all variables
     const wordsDatabaseUrl = 
         "https://gist.githubusercontent.com/skillcrush-curriculum/7061f1d4d3d5bfe47efbfbcfe42bf57e/raw/5ffc447694486e7dea686f34a6c085ae371b43fe/words.txt"; //we made this a variable because it's a verrry long string (too long) and also - we can use it again wherever now that it's a variable. This is a little different from the way SC originally suggested. Go back to notes.
         let textFile = await fetch (wordsDatabaseUrl); //fetching file not contents
         let content = await textFile.text ();
-    console.log (content); //logs out contents of entire text file - alphabetically, hundreds of words. It's working.
-}
-getWord ();
+        const wordArray = content.split("\n"); //could also go after console.log
+        const randomIndex = Math.floor(Math.random() * wordArray.length); //put within the function because we need wordArray.length
+        word = wordArray[randomIndex].trim(); //reassigning word randomly, also trims extra space
+        console.log (wordArray); //logs out contents of entire text file - alphabetically, hundreds of words. It's working.
+        placeholder(word); //this is new word now. This goes here to reset dots after choice of word.
+    }
+//getWord (); initially added as test of console log. May need to move. No longer needed here - moving to line 35.
 
 const placeholder = function (word) {
     const placeholderLetters = []; //empty array is for adding to
@@ -28,7 +32,8 @@ const placeholder = function (word) {
     wordInProgress.innerText = placeholderLetters.join(""); //see notes
 };
 
-placeholder(word);
+//placeholder(word); no longer necessary bc it's being called as part of getWord now
+getWord (); //initially added as test of console log. May need to move. No longer needed here - moving to line 35.
 
 button.addEventListener ("click", function (e) {
     e.preventDefault();
@@ -112,6 +117,7 @@ const decreaseGuesses = function (guess) {
     } 
     if (remainingGuesses === 0) {
         feedbackMessage.innerText = `You're out of guesses. The word is ${word}.`;
+        startOver (); //call if decreases to 0 guesses - they lost and can start new game
     }
     if (remainingGuesses === 1) {
         remainingGuessesSpan.innerText = `one guess`;
@@ -125,6 +131,28 @@ const successfulGuess = function () {
     if (wordInProgress.innerText === word.toUpperCase()) {
         feedbackMessage.innerText = "You guessed correct the word! Congrats!";
     feedbackMessage.classList.add("win");
+    startOver (); //call if they won so they can start new game
     } //it's html so it's going to be innerText, nothing to do w/ vars or methods
 }
+
+const startOver = function () {
+    button.classList.add("hide");
+    guessedLettersBox.classList.add("hide");
+    remainingGuessesParagraph.classList.add("hide");
+    playAgainButton.classList.remove("hide"); //we want to see this so we're not adding "hide" class - we're removing it
+}
+
+playAgainButton.addEventListener ("click", function (e) {//Event listeners go outside functions so at the very beginning they start to work while JS is loading. set this outside function so it'll called right at beginning
+    feedbackMessage.classList.remove("win");
+    feedbackMessage.innerText = ""; //empty the text of message element
+    guessedLettersBox.innerText = ""; //empty the text of where guessed letters appear element
+    remainingGuesses = 8;
+    guessedLetters = []; //setting these back to what they were originally defined as bc that's how game started
+    remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
+    button.classList.remove("hide");
+    guessedLettersBox.classList.remove("hide");
+    remainingGuessesParagraph.classList.remove("hide");
+    playAgainButton.classList.add("hide"); //we just changed "remove" to "add" and vice versa 
+    getWord (); //all going to happen when click button so keep this inside
+});
 
