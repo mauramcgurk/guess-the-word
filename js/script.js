@@ -34,7 +34,7 @@ getWord ();
 button.addEventListener ("click", function (e) {
     e.preventDefault();
     feedbackMessage.innerText = ""; 
-    const inputGuess = input.value;/
+    const inputGuess = input.value;
     const goodGuess = validateGuess(inputGuess);
 
     if (goodGuess) {
