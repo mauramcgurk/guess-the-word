@@ -8,16 +8,15 @@ const feedbackMessage = document.querySelector(".message");//empty paragraph whe
 const playAgainButton = document.querySelector(".play-again");//hidden PLay Again button
 
 let word = "magnolia";//test word
-let guessedLetters = []; //empty array for adding to. 
+let guessedLetters = []; 
 let remainingGuesses = 8;
 
 const getWord = async function () {  
     const wordsDatabaseUrl = await fetch("https://gist.githubusercontent.com/skillcrush-curriculum/7061f1d4d3d5bfe47efbfbcfe42bf57e/raw/5ffc447694486e7dea686f34a6c085ae371b43fe/words.txt"); //we made this a variable because it's a verrry long string (too long) and also - we can use it again wherever now that it's a variable. This is a little different from the way SC originally suggested. Go back to notes.
     const words = await wordsDatabaseUrl.text(); 
-    //let content = await textFile.text ();
     const wordArray = words.split("\n"); 
     const randomIndex = Math.floor(Math.random() * wordArray.length); 
-    word = wordArray[randomIndex].trim(); //reassigning word randomly, also trims extra space
+    word = wordArray[randomIndex].trim(); 
     placeholder(word); //this is new word now. 
     };
 
@@ -57,7 +56,6 @@ const validateGuess = function (input) {
         //check if they’ve entered a character that doesn’t match the regular expression pattern
         feedbackMessage.innerText = "Please enter a letter from A to Z.";
     } else {
-        //We got a single letter
         return input;
     }
 };
@@ -68,18 +66,17 @@ const makeGuess = function (inputGuess) {
         feedbackMessage.innerText = "Oops, you've already guessed that letter! Try again.";
     } else {
         guessedLetters.push(inputGuess); 
-        decreaseGuesses(inputGuess); //decreasing number of guesses each time
+        decreaseGuesses(inputGuess); 
         showGuessLetters();
         updateWordInProgress(guessedLetters);
     }
 };
 
 const showGuessLetters = function () {
-    guessedLettersBox.innerHTML = ""; //empty the text of message element
+    guessedLettersBox.innerHTML = ""; 
     for (const letter of guessedLetters) { 
         const li = document.createElement("li"); 
         li.innerText = letter;
-        //guessedLettersBox.append(letter); 
         guessedLettersBox.append(li); 
     }
 };
@@ -95,26 +92,25 @@ const updateWordInProgress = function (guessedLetters) {
             revealWord.push("●"); 
         } 
     }
-    wordInProgress.innerText = revealWord.join(""); //passing empty string
+    wordInProgress.innerText = revealWord.join("");
     successfulGuess();
 };      
 
 const decreaseGuesses = function (guess) {
     const wordUpper = word.toUpperCase(); 
     if (!wordUpper.includes(guess)) {
-        feedbackMessage.innerText = `No, the word has no ${guess}. Try again.`;
-        remainingGuesses -= 1; //subtracts 1
+        feedbackMessage.innerText = `No...the word has no ${guess}. Try again!`;
+        remainingGuesses -= 1; 
     } else {
-        feedbackMessage.innerText = `Yes, the word contains the letter ${guess}.`;
+        feedbackMessage.innerText = `Boom! The word contains the letter ${guess} and this turn won't count against your guesses. Keep going!`;
     }
 
     if (remainingGuesses === 0) {
-        feedbackMessage.innerHTML = `You're out of guesses. The word is ${word}.`;
-        startOver(); //call if decreases to 0 guesses - they lost and can start new game
+        feedbackMessage.innerHTML = `Bummer! You're out of guesses. The word is "${word}."`;
+        startOver(); 
     } else if (remainingGuesses === 1) {
         remainingGuessesSpan.innerText = `${remainingGuesses} guess`;
     } else {
-        //remainingGuesses >1) 
         remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
     }
 };
@@ -122,10 +118,10 @@ const decreaseGuesses = function (guess) {
 const successfulGuess = function () {
     if (word.toUpperCase() === (wordInProgress.innerText)) {
         feedbackMessage.classList.add("win");
-        feedbackMessage.innerHTML = `<p class="highlight">You guessed the word! Congrats!</p>`;
+        feedbackMessage.innerHTML = `<p class="highlight">Hooray! You guessed the word!</p>`;
 
     
-    startOver(); //call if they won so they can start new game
+    startOver(); 
     } 
 };
 
@@ -141,7 +137,7 @@ playAgainButton.addEventListener("click", function () {
     guessedLetters = []; 
     remainingGuesses = 8;
     remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
-    guessedLettersBox.innerText = ""; //empty the text of where guessed letters appear element
+    guessedLettersBox.innerText = ""; 
     feedbackMessage.innerText = ""; 
 
 getWord();
